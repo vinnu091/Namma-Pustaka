@@ -1,0 +1,435 @@
+| **UI/UX DESIGN SYSTEM — STANDARD OPERATING PROCEDURE** | v1.0  │  Confidential |
+| --- | --- |
+
+**UI/UX DESIGN SYSTEM**
+
+Standard Operating Procedure
+
+*Agent-Ready Design Framework*
+
+Version 1.0  |  Applicable to: Mobile, Web & Cross-Platform Apps
+
+# **1. Purpose ****&**** Scope**
+
+This SOP defines a universal design language and implementation standard for all app interfaces. It ensures visual and experiential consistency across any type of application while preserving each app’s unique functionality. Developers and AI agents must apply this SOP in full when building or updating any UI.
+
+**Scope:**
+
+- Mobile applications (iOS & Android)
+
+- Web applications (desktop & responsive)
+
+- Cross-platform apps (React Native, Flutter, etc.)
+
+- Admin dashboards and internal tools
+
+This SOP does NOT change, override, or modify:
+
+- Navigation flow or routing logic
+
+- Database schema or backend structure
+
+- Feature logic, QR issuing, authentication, or any working functionality
+
+- Business rules or data operations
+
+It ONLY governs the visual layer: layout, color, typography, spacing, components, and interaction patterns.
+
+# **2. Design Principles**
+
+All interfaces built under this SOP must adhere to the following five core principles:
+
+| **Soft ****&**** Approachable** | Use rounded corners, light surfaces, and gentle color gradients. Avoid harsh edges and high-contrast brutalism. |
+| --- | --- |
+| **Content-First** | Cards, book covers, and media assets are the hero. UI chrome should step back and give breathing room. |
+| **Consistent Rhythm** | Uniform spacing units (8px grid), consistent component heights, and predictable layout zones create a trustworthy feel. |
+| **Accessible by Default** | All text meets WCAG AA contrast. Touch targets meet 44px minimum. Never rely on color alone to convey meaning. |
+| **Mobile-Native Feel** | Designs should feel native on mobile: bottom-heavy navigation, thumb-reachable actions, and scrollable content zones. |
+
+# **3. Color System**
+
+All colors must be referenced by their token name in code, never hard-coded hex values unless defining the token itself. The agent must apply this palette exactly.
+
+## **3.1 Primary Palette**
+
+| **Token Name** | **Hex Value** | **Usage** |
+| --- | --- | --- |
+| --color-primary | #1B2B6B | App name, primary headings, nav active state |
+| --color-accent | #3B5BDB | Buttons, links, active tab highlights, icons |
+| --color-pink | #FF6B9D | Progress bars, highlights, CTA micro-elements |
+| --color-bg | #FAFAFA | Page background, card surfaces |
+| --color-surface | #FFFFFF | Cards, modals, bottom sheets |
+| --color-text-primary | #1B2B6B | Headings, important labels |
+| --color-text-secondary | #888888 | Sub-labels, metadata, timestamps |
+| --color-border | #F0F0F0 | Card borders, dividers, input outlines |
+| --color-tag-bg | #EEF1FB | Filter chips, badge backgrounds |
+
+## **3.2 Color Rules**
+
+- Never use pure black (#000000) for text. Use --color-primary (#1B2B6B) instead.
+
+- Background surfaces must always be #FAFAFA or #FFFFFF. Never use grey-tinted backgrounds.
+
+- Pink/accent color (#FF6B9D) is used sparingly for energy — progress bars, stars, active indicators only.
+
+- Buttons: Primary = --color-accent fill + white text. Secondary = --color-tag-bg fill + --color-accent text.
+
+# **4. Typography System**
+
+Typography creates hierarchy and mood. The font stack below must be used without exception. Load from Google Fonts or system equivalents.
+
+| **Role** | **Font Family** | **Size / Weight** | **When to Use** |
+| --- | --- | --- | --- |
+| Screen Title | Nunito / Poppins | 24px Bold | Page header, "Recently Listening" |
+| Section Heading | Nunito / Poppins | 18px SemiBold | "My Bucketlist", "My Audio Books" |
+| Card Title | Nunito / Poppins | 15px SemiBold | Book title, item name |
+| Metadata / Label | Nunito / Poppins | 13px Regular | Author name, sub-label, timestamp |
+| Filter Chip / Tag | Nunito / Poppins | 13px Medium | "all books", "new books", "popular" |
+| Button Text | Nunito / Poppins | 14px SemiBold | "start reading", "want to read" |
+| Rating / Badge | Nunito / Poppins | 13px Bold | Star ratings, small numeric badges |
+
+## **4.1 Typography Rules**
+
+- Line height: 1.5x for body text, 1.2x for headings.
+
+- Letter spacing: -0.3px for headings, 0px for body.
+
+- Never use all-caps for body text. Sentence case for headings, title case for buttons.
+
+- Text contrast ratio must be at minimum 4.5:1 against the background (WCAG AA).
+
+# **5. Spacing ****&**** Layout Grid**
+
+All spacing must be multiples of 8px. Layouts are built on a 4-column grid (mobile) or 12-column grid (desktop/web).
+
+## **5.1 Spacing Scale**
+
+| **Token** | **Value** | **Usage** |
+| --- | --- | --- |
+| --space-xs | 4px | Icon padding, badge inner spacing |
+| --space-sm | 8px | Between icon and label, chip padding |
+| --space-md | 16px | Card inner padding, section gaps |
+| --space-lg | 24px | Between cards, section top padding |
+| --space-xl | 32px | Page horizontal padding, hero spacing |
+| --space-2xl | 48px | Between major screen sections |
+
+## **5.2 Border Radius Scale**
+
+- Small elements (chips, badges): border-radius: 8px
+
+- Buttons: border-radius: 12px
+
+- Cards: border-radius: 16px
+
+- Bottom sheets, modals: border-radius: 24px (top corners only)
+
+- Circular album art / avatar: border-radius: 50%
+
+## **5.3 Layout Zones (Mobile)**
+
+- Top Zone (0–56px): Status bar clearance. No interactive elements.
+
+- Header Zone (56–96px): Screen title + search/profile icon only.
+
+- Hero Zone (96–280px): Primary content (album art, featured card, banner).
+
+- Filter/Tab Zone (280–328px): Horizontal scrollable filter chips.
+
+- Content Zone (328px+): Scrollable list of cards or grid items.
+
+- Bottom Navigation (fixed, 64px): Max 5 items. Active item uses --color-accent.
+
+# **6. Component Library**
+
+These components are the building blocks of all screens. Agents must use these exact specifications. Do not deviate without documented justification.
+
+## **6.1 Cards**
+
+Cards are the primary content container. They must never have hard shadows — use soft box-shadow only.
+
+**Anatomy:**
+
+- Background: --color-surface (#FFFFFF)
+
+- Border: 1px solid --color-border (#F0F0F0)
+
+- Border radius: 16px
+
+- Padding: 12px (--space-md minus 4px for tighter card feel)
+
+- Shadow: 0 2px 12px rgba(0,0,0,0.06)
+
+- Image (left): 56x80px, border-radius: 10px, object-fit: cover
+
+- Title: --color-text-primary, 15px SemiBold
+
+- Subtitle: --color-text-secondary, 13px Regular
+
+- Action Button (right): 80px wide, height 32px, border-radius: 12px
+
+## **6.2 Buttons**
+
+Three button types. Never mix types on the same action row.
+
+**Primary Button:**
+
+- Background: --color-accent (#3B5BDB)
+
+- Text: white, 14px SemiBold
+
+- Padding: 8px 20px
+
+- Border radius: 12px
+
+- No border
+
+**Secondary Button:**
+
+- Background: --color-tag-bg (#EEF1FB)
+
+- Text: --color-accent (#3B5BDB), 14px SemiBold
+
+- Padding: 8px 20px
+
+- Border radius: 12px
+
+- No border
+
+**Ghost / Outline Button:**
+
+- Background: transparent
+
+- Border: 1.5px solid --color-accent
+
+- Text: --color-accent, 14px SemiBold
+
+- Padding: 8px 20px
+
+- Border radius: 12px
+
+## **6.3 Filter Chips / Tabs**
+
+- Height: 36px
+
+- Padding: 8px 16px
+
+- Border radius: 20px (pill shape)
+
+- Active state: --color-accent background + white text
+
+- Inactive state: white/transparent background + --color-text-secondary text + --color-border border
+
+- Font: 13px Medium
+
+- Gap between chips: 8px (--space-sm)
+
+- Horizontally scrollable, no wrap
+
+## **6.4 Circular Media Tiles (Audio Books)**
+
+- Size: 80x80px to 100x100px
+
+- Shape: perfect circle (border-radius: 50%)
+
+- Border: 3px solid --color-pink OR 3px solid --color-accent (alternate)
+
+- Image: object-fit: cover, fills full circle
+
+- Label below: --color-text-primary, 13px SemiBold, centered
+
+- Sub-label: --color-text-secondary, 12px Regular, centered
+
+- Gap between tiles: 16px (--space-md)
+
+- Row scrolls horizontally
+
+## **6.5 Progress / Audio Slider**
+
+- Track: --color-border, height 4px, border-radius 2px
+
+- Fill: linear-gradient(--color-pink, --color-accent) or solid --color-pink
+
+- Thumb: 12px circle, --color-pink fill, white border 2px
+
+- Time labels: 11px, --color-text-secondary, left/right aligned
+
+## **6.6 Search Bar**
+
+- Height: 44px
+
+- Background: --color-bg (#FAFAFA)
+
+- Border: 1px solid --color-border
+
+- Border radius: 12px
+
+- Padding: 0 16px
+
+- Leading icon: search (20px, --color-text-secondary)
+
+- Placeholder text: --color-text-secondary, 14px
+
+- Focus state: border-color changes to --color-accent, subtle shadow
+
+## **6.7 Star Rating**
+
+- Filled star: --color-pink (#FF6B9D) or gold (#FFB400)
+
+- Size: 12–14px
+
+- Displayed inline with numeric value to the right
+
+- Font: 13px Bold, --color-text-primary
+
+# **7. Screen Architecture**
+
+Every screen in the app follows one of these three templates. Agents must select and apply the matching template based on the screen’s purpose.
+
+## **7.1 Template A: Discovery Screen**
+
+**Use for: Home, Explore, Browse, Search results, Feed**
+
+- Zone 1 — Header: Screen title (left, bold) + avatar/icon (right)
+
+- Zone 2 — Hero: Large featured card or currently-playing media
+
+- Zone 3 — Filter chips: Horizontal scrollable tabs
+
+- Zone 4 — Content list: Vertical scrollable card list
+
+## **7.2 Template B: Collection Screen**
+
+**Use for: Bucketlist, Library, Saved, Wishlist, History**
+
+- Zone 1 — Collapsible header: Section title + collapse/expand chevron
+
+- Zone 2 — Horizontal media scroll (circles or squares)
+
+- Zone 3 — Featured card with CTA button
+
+- Zone 4 — Horizontal audio/media row
+
+- Zone 5 (optional) — Now Playing mini-player (sticky bottom)
+
+## **7.3 Template C: Detail Screen**
+
+**Use for: Item detail, Profile, Settings, Single record**
+
+- Zone 1 — Back navigation + title
+
+- Zone 2 — Hero image/cover (full-width, rounded bottom corners)
+
+- Zone 3 — Metadata block (title, author, rating, tags)
+
+- Zone 4 — Action buttons (primary CTA + secondary option)
+
+- Zone 5 — Scrollable description / related content
+
+# **8. Motion ****&**** Interaction**
+
+Animations must be subtle and purposeful. They should reinforce action — never distract.
+
+| **Interaction** | **Animation** | **Duration / Easing** |
+| --- | --- | --- |
+| Button press | Scale 0.96 + opacity 0.85 | 150ms ease-in-out |
+| Card tap | Scale 0.98 + shadow increase | 180ms ease |
+| Screen transition | Slide left (push) or fade | 280ms ease-in-out |
+| Bottom sheet open | Slide up from bottom | 320ms cubic-bezier(0.25,0.46,0.45,0.94) |
+| Filter chip select | Background fill + text color swap | 200ms ease |
+| Loading skeleton | Shimmer left-to-right | 1200ms infinite linear |
+| Page load elements | Staggered fade-in (50ms delay per item) | 300ms ease-out |
+
+# **9. Agent Execution Instructions**
+
+When an AI agent receives a request to build an app using this SOP, the following execution order is mandatory:
+
+## **9.1 Pre-Build Checklist**
+
+- Read this SOP in full before writing any code.
+
+- Identify which screen template (A, B, or C) applies to each screen being built.
+
+- Map the app’s content types to the component library (Section 6).
+
+- Confirm the color tokens are declared as CSS variables (or equivalent) in the root/theme file.
+
+- Confirm Google Fonts or equivalent is loaded: Nunito (preferred) or Poppins as fallback.
+
+## **9.2 Per-Screen Rules**
+
+- Apply the correct screen template from Section 7.
+
+- Use ONLY components from Section 6. Do not invent new component shapes.
+
+- All spacing must use tokens from Section 5 (--space-xs through --space-2xl).
+
+- Do not add screens, buttons, or flows not specified by the user.
+
+- Preserve all existing app logic, navigation, and data flow exactly as-is.
+
+## **9.3 Forbidden Actions**
+
+The following are strictly prohibited regardless of user phrasing:
+
+- Changing navigation structure or routing logic
+
+- Modifying database schema, API endpoints, or backend logic
+
+- Removing existing features or screens
+
+- Adding new screens, buttons, or features not explicitly requested
+
+- Using colors, fonts, or spacing values outside this SOP
+
+- Using dark backgrounds unless the user explicitly requests a dark mode variant
+
+- Using shadow values heavier than 0 8px 24px rgba(0,0,0,0.10)
+
+## **9.4 How to Handle Ambiguity**
+
+If a user’s app does not fit a defined template or component type:
+
+- Choose the closest matching template and note the deviation.
+
+- Map any new content type to the closest existing component (e.g., a recipe card uses the same card anatomy as a book card).
+
+- Do not invent new color tokens. Extend the palette only by using tints/shades of existing tokens.
+
+- If a feature is unclear, implement the UI shell and leave logic as a placeholder comment.
+
+# **10. Dark Mode (Optional)**
+
+Dark mode is an opt-in variant. Only implement when the user explicitly requests it. Token overrides:
+
+| **Token** | **Light Mode** | **Dark Mode Override** |
+| --- | --- | --- |
+| --color-bg | #FAFAFA | #0F1117 |
+| --color-surface | #FFFFFF | #1C1F2E |
+| --color-text-primary | #1B2B6B | #E8EAFB |
+| --color-text-secondary | #888888 | #6B7090 |
+| --color-border | #F0F0F0 | #2A2D40 |
+| --color-tag-bg | #EEF1FB | #252840 |
+
+# **11. Accessibility Requirements**
+
+All interfaces must pass these checks before delivery:
+
+- Text contrast ratio: minimum 4.5:1 for normal text, 3:1 for large text (WCAG AA).
+
+- Touch targets: minimum 44x44px for all interactive elements.
+
+- Images: all meaningful images have alt text. Decorative images have empty alt.
+
+- Focus states: visible focus ring on all interactive elements (for web/keyboard navigation).
+
+- Screen reader: semantic HTML or ARIA roles used correctly. No div-soup for buttons.
+
+- Do not use color as the only way to convey information (e.g., error states must also use an icon or text).
+
+# **12. Versioning ****&**** Change Log**
+
+| **Version** | **Date** | **Changes** | **Author** |
+| --- | --- | --- | --- |
+| 1.0 | 2026-05-08 | Initial release. Derived from bookshelf/audiobook app design system. | Design System Owner |
+
+*UI/UX Design System SOP — v1.0  |  Apply this document to every app build.*
